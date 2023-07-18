@@ -1,0 +1,10 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.tslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "code-runner.executorMap": {
+    "typescript": "npx ts-node --files --transpile-only"
+  }
+}
