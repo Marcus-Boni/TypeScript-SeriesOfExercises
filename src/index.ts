@@ -99,3 +99,16 @@ function nomeCompleto(...arg: string[]): void {
 }
 
 nomeCompleto('Marcus', 'Evandro', 'Boni');
+
+const object: {
+  readonly chaveA: string;
+  chaveB: string;
+  chaveC?: number;
+} = {
+  chaveA: 'Marcus',
+  chaveB: 'Boni',
+};
+
+object.chaveB = 'novoValor';
+
+console.log(object);
