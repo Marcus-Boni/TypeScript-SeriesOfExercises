@@ -112,3 +112,38 @@ const object: {
 object.chaveB = 'novoValor';
 
 console.log(object);
+
+function multiplicaArgs(...args: Array<number>) {
+  return args.reduce((acc, valor) => acc * valor, 1);
+}
+
+const result = multiplicaArgs(1, 2, 3, 4);
+
+console.log(result);
+
+const dadosCliente: readonly [number, string, ...string[]] = [1, '']; // aparentemente o rest operator torna opcional
+const array2: ReadonlyArray<string> = ['Marcus', 'Boni'];
+
+console.log(dadosCliente);
+console.log(array2);
+
+interface Person {
+  name: string;
+  lastName?: string;
+}
+
+export function createPerson(name: string, lastName?: string): Person {
+  return {
+    name,
+    lastName,
+  };
+}
+
+const person = createPerson('Marcus');
+
+console.log(person);
+
+export const squareOf = (x: any) => {
+  if (typeof x === 'number') return x * x;
+  return null;
+};
