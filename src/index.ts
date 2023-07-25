@@ -139,11 +139,85 @@ export function createPerson(name: string, lastName?: string): Person {
   };
 }
 
-const person = createPerson('Marcus');
+const person1 = createPerson('Marcus');
 
-console.log(person);
+console.log(person1);
 
-export const squareOf = (x: any) => {
+export const squareOf = (x: unknown) => {
   if (typeof x === 'number') return x * x;
   return null;
 };
+
+let x: unknown;
+const y = 200;
+
+x = 200;
+x = 10;
+
+if (typeof x === 'number') console.log(x + y);
+
+const addOrConcat = (a: string | number, b: string | number) => {
+  if (typeof a === 'number' && b === 'number') return a + b;
+  return `${a}${b}`;
+};
+
+console.log(addOrConcat('aa', 'bb'));
+
+let z = 10; //eslint-disable-line
+const teste = 'sim';
+
+console.log(teste);
+
+const person = {
+  nome: 'Marcus' as const,
+  sobrenome: 'Boni',
+};
+
+person.nome = 'Marcus';
+
+console.log(person);
+
+enum sim {
+  V = 'Vermelho',
+}
+
+enum sim {
+  A = 'Azul',
+}
+
+console.log(sim);
+
+type Pessoa = {
+  nome: string;
+  idade: number;
+  salario: number;
+  corPreferida?: string;
+};
+
+type CorRGB = 'Vermelho' | 'Verde' | 'Azul';
+type CorCMYK = 'Ciano' | 'Magenta' | 'Amarelo' | 'Preto';
+type CorPreferida = CorRGB | CorCMYK;
+
+const somebody: Pessoa = {
+  nome: 'Marcus',
+  idade: 19,
+  salario: 200_000,
+};
+
+export function setFavoriteColor(pessoa: Pessoa, cor: CorPreferida) {
+  return { ...pessoa, corPreferida: cor };
+}
+
+console.log(setFavoriteColor(somebody, 'Azul'));
+
+type TemNome = { nome: string };
+type TemIdade = { idade: number };
+type TemCasa = { localidade: boolean };
+
+type Intersection = TemNome | TemCasa | TemIdade;
+
+const person2: Intersection = {
+  nome: 'Marcus',
+};
+
+console.log(person2);
