@@ -221,3 +221,21 @@ const person2: Intersection = {
 };
 
 console.log(person2);
+
+type CallableFunction = (item: string) => string;
+
+export const mapStrings = (array: string[], callbackfn: CallableFunction): string[] => {
+  const newArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const item = array[i];
+    newArray.push(callbackfn(item));
+  }
+
+  return newArray;
+};
+
+const abc = ['a', 'b', 'c'];
+const abcMapped = mapStrings(abc, (item) => item.toUpperCase());
+
+console.log(abcMapped);
