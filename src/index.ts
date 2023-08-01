@@ -1,7 +1,3 @@
-import funcao from './mod';
-
-funcao();
-
 // os arquivos .ts são transpilados para .js na pasta dist
 
 type NomeCompleto = number | string;
@@ -239,3 +235,24 @@ const abc = ['a', 'b', 'c'];
 const abcMapped = mapStrings(abc, (item) => item.toUpperCase());
 
 console.log(abcMapped);
+
+type User = {
+  name: string;
+  id: number;
+};
+
+type Admin = {
+  isAdmin: true;
+  level: 0 | 1 | 2;
+};
+
+type UserAdmin = User & Admin;
+
+const marcus: UserAdmin = {
+  name: 'Marcus',
+  id: 1,
+  isAdmin: true,
+  level: 0,
+};
+
+console.log(marcus);
