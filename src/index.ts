@@ -256,3 +256,20 @@ const marcus: UserAdmin = {
 };
 
 console.log(marcus);
+
+type RowProps = [colOne: number, colTwo: string];
+
+const array: RowProps = [12, ''];
+
+console.log(array);
+
+type FruitsProps = 'banana' | 'limao';
+
+type FruitCountProps = {
+  [key in FruitsProps]: string;
+};
+
+export const fruits: FruitCountProps = {
+  banana: 'banana',
+  limao: 'limao',
+};

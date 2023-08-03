@@ -60,22 +60,28 @@ form.addEventListener('submit', submitFormEvent);
 const centimeter = document.querySelector('#centimeter') as HTMLInputElement;
 const inches = document.querySelector('#inches') as HTMLInputElement;
 
-centimeter.addEventListener('input', (e) => {
-  const target = e.currentTarget as HTMLInputElement;
-  const calcCentimeters = calcCentimeterToInches(Number(target.value));
-  inches.value = calcCentimeters.toString();
-});
+type FnConvertListener = (e: Event) => void;
+type FnCalclistener = (value: number) => number;
 
-inches.addEventListener('input', (e) => {
-  const target = e.currentTarget as HTMLInputElement;
-  const calcInches = calcInchesToCentimeters(Number(target.value));
-  centimeter.value = calcInches.toString();
-});
+const convertToInches: FnConvertListener = (e) => {
+  const input = e.currentTarget as HTMLInputElement;
+  const calcCentimeters = calcCentimeterToInches(Number(input.value)).toString();
+  inches.value = calcCentimeters;
+};
 
-const calcInchesToCentimeters = (value: number): number => {
+const convertToCentimeter: FnConvertListener = (e) => {
+  const input = e.currentTarget as HTMLInputElement;
+  const calcInches = calcInchesToCentimeters(Number(input.value)).toString();
+  centimeter.value = calcInches;
+};
+
+const calcInchesToCentimeters: FnCalclistener = (value) => {
   return value * 2.54;
 };
 
-const calcCentimeterToInches = (value: number): number => {
+const calcCentimeterToInches: FnCalclistener = (value) => {
   return value * 0.393700787;
 };
+
+centimeter.addEventListener('input', convertToInches);
+inches.addEventListener('input', convertToCentimeter);
