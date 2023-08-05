@@ -383,5 +383,114 @@ export class Someone {
 
 const someone = new Someone('Marcus', 'Boni', 20, '222-222-333.22');
 someone.cpf = '111';
-
 console.log(someone);
+
+export class DataBase {
+  constructor(
+    private host: string,
+    private user: string,
+    private password: string,
+  ) {}
+
+  connect(): void {
+    console.log(`Conectado: ${this.host}, ${this.user}, ${this.password}`);
+  }
+}
+
+const db1 = new DataBase('localhost', 'root', '123456'); //Questão de não instanciar uma nova classe caso ja tenha uma: singleton Gof | factory
+db1.connect();
+
+export abstract class Personagem {
+  protected abstract emoji: string;
+  constructor(
+    protected nome: string,
+    protected ataque: number,
+    protected vida: number,
+  ) {}
+
+  atacar(personagem: Personagem): void {
+    this.bordao();
+    personagem.perderVida(this.ataque);
+  }
+
+  perderVida(forcaAtaque: number): void {
+    this.vida -= forcaAtaque;
+    console.log(`${this.emoji} ${this.nome} agora tem ${this.vida} de vida...`);
+  }
+
+  abstract bordao(): void;
+}
+
+class Guerreira extends Personagem {
+  protected emoji = '\u{1F9DD}';
+  bordao(): void {
+    console.log('GUERREIRAAAAA!!!');
+  }
+}
+
+class Monster extends Personagem {
+  protected emoji = '\u{1F9DC}';
+  bordao(): void {
+    console.log('MONSTERRRRRR!!!');
+  }
+}
+
+const guerreira = new Guerreira('Guerreira', 100, 1000);
+const monster = new Monster('Monster', 120, 1000);
+guerreira.atacar(monster);
+console.log(guerreira);
+console.log(monster);
+
+export class Escritor {
+  private _ferramenta: Ferramenta | null = null;
+
+  constructor(private _nome: string) {}
+
+  get nome(): string {
+    return this._nome;
+  }
+
+  set ferramenta(ferramenta: Ferramenta | null) {
+    this._ferramenta = ferramenta;
+  }
+
+  get ferramenta(): Ferramenta | null {
+    return this._ferramenta;
+  }
+
+  escrever(): void {
+    if (this._ferramenta === null) {
+      console.log('Não posso escrever sem ferrramenta...');
+      return;
+    }
+    this._ferramenta.escrever();
+  }
+}
+
+export abstract class Ferramenta {
+  constructor(private _nome: string) {}
+  abstract escrever(): void;
+
+  get nome(): string {
+    return this._nome;
+  }
+}
+
+export class Caneta extends Ferramenta {
+  escrever(): void {
+    console.log(`${this.nome} está escrevendo...`);
+  }
+}
+
+export class MaquinaEscrever extends Ferramenta {
+  escrever(): void {
+    console.log(`${this.nome} está escrevendo...`);
+  }
+}
+
+const escritor = new Escritor('Marcus');
+const caneta = new Caneta('Bic');
+export const maquinaEscrever = new MaquinaEscrever('Ford');
+
+escritor.ferramenta = caneta;
+escritor.escrever();
