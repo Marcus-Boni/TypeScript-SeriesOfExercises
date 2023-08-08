@@ -494,3 +494,67 @@ export const maquinaEscrever = new MaquinaEscrever('Ford');
 
 escritor.ferramenta = caneta;
 escritor.escrever();
+
+export class Carro {
+  public readonly motor = new Motor();
+
+  ligar(): void {
+    this.motor.ligar();
+  }
+  acelerar(): void {
+    this.motor.acelerar();
+  }
+  parar(): void {
+    this.motor.parar();
+  }
+  desligar(): void {
+    this.motor.desligar();
+  }
+}
+
+export class Motor {
+  ligar(): void {
+    console.log('Motor está ligando!');
+  }
+  acelerar(): void {
+    console.log('Motor está acelerando!');
+  }
+  parar(): void {
+    console.log('Motor está parando!');
+  }
+  desligar(): void {
+    console.log('Motor está desligando!');
+  }
+}
+
+const carro = new Carro();
+
+carro.ligar();
+carro.acelerar();
+carro.desligar();
+carro.parar();
+
+type TipoNome = {
+  nome: string;
+};
+
+type TipoSobrenome = {
+  sobrenome: string;
+};
+
+type TipoNomeCompleto = {
+  nomeCompleto(): string;
+};
+
+export class Alguem implements TipoNome, TipoSobrenome, TipoNomeCompleto {
+  constructor(
+    public nome: string,
+    public sobrenome: string,
+  ) {}
+  nomeCompleto(): string {
+    return this.nome + ' ' + this.sobrenome;
+  }
+}
+
+const alguem = new Alguem('Marcus', 'Boni');
+console.log(alguem);
