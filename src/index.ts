@@ -558,3 +558,28 @@ export class Alguem implements TipoNome, TipoSobrenome, TipoNomeCompleto {
 
 const alguem = new Alguem('Marcus', 'Boni');
 console.log(alguem);
+
+function add(a: unknown, b: unknown) {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return a + b;
+  }
+
+  return `${a} ${b}`;
+}
+
+console.log(add('1', '2'));
+
+type CoresObj = typeof coresObj;
+type CoresChaves = keyof CoresObj;
+
+const coresObj = {
+  vermelho: 'red',
+  azul: 'blue',
+  verde: 'green',
+};
+
+function traduzirCor(cor: CoresChaves, cores: typeof coresObj) {
+  return cores[cor];
+}
+
+console.log(traduzirCor('vermelho', coresObj));
